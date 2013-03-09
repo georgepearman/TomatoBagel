@@ -10,6 +10,10 @@
 		5ED9A88916EAD23C0061605E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED9A88816EAD23C0061605E /* Foundation.framework */; };
 		5ED9A88C16EAD23C0061605E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A88B16EAD23C0061605E /* main.m */; };
 		5ED9A89016EAD23C0061605E /* Risk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5ED9A88F16EAD23C0061605E /* Risk.1 */; };
+		5ED9A8B216EAD7C20061605E /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A8B116EAD7C20061605E /* Country.m */; };
+		5ED9A8B516EAD81D0061605E /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A8B416EAD81D0061605E /* Player.m */; };
+		5ED9A8B816EAD8C50061605E /* RiskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A8B716EAD8C50061605E /* RiskModel.m */; };
+		5ED9A8BB16EADA0C0061605E /* SoldierCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A8BA16EADA0C0061605E /* SoldierCard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +35,14 @@
 		5ED9A88B16EAD23C0061605E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5ED9A88E16EAD23C0061605E /* Risk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Risk-Prefix.pch"; sourceTree = "<group>"; };
 		5ED9A88F16EAD23C0061605E /* Risk.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Risk.1; sourceTree = "<group>"; };
+		5ED9A8B016EAD7C20061605E /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		5ED9A8B116EAD7C20061605E /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		5ED9A8B316EAD81D0061605E /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		5ED9A8B416EAD81D0061605E /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		5ED9A8B616EAD8C50061605E /* RiskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiskModel.h; sourceTree = "<group>"; };
+		5ED9A8B716EAD8C50061605E /* RiskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiskModel.m; sourceTree = "<group>"; };
+		5ED9A8B916EADA0C0061605E /* SoldierCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldierCard.h; sourceTree = "<group>"; };
+		5ED9A8BA16EADA0C0061605E /* SoldierCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldierCard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +86,14 @@
 			isa = PBXGroup;
 			children = (
 				5ED9A88B16EAD23C0061605E /* main.m */,
+				5ED9A8B016EAD7C20061605E /* Country.h */,
+				5ED9A8B116EAD7C20061605E /* Country.m */,
+				5ED9A8B316EAD81D0061605E /* Player.h */,
+				5ED9A8B416EAD81D0061605E /* Player.m */,
+				5ED9A8B616EAD8C50061605E /* RiskModel.h */,
+				5ED9A8B716EAD8C50061605E /* RiskModel.m */,
+				5ED9A8B916EADA0C0061605E /* SoldierCard.h */,
+				5ED9A8BA16EADA0C0061605E /* SoldierCard.m */,
 				5ED9A88F16EAD23C0061605E /* Risk.1 */,
 				5ED9A88D16EAD23C0061605E /* Supporting Files */,
 			);
@@ -140,6 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED9A88C16EAD23C0061605E /* main.m in Sources */,
+				5ED9A8B216EAD7C20061605E /* Country.m in Sources */,
+				5ED9A8B516EAD81D0061605E /* Player.m in Sources */,
+				5ED9A8B816EAD8C50061605E /* RiskModel.m in Sources */,
+				5ED9A8BB16EADA0C0061605E /* SoldierCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
