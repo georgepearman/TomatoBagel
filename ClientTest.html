@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="Libs/jquery191.js"></script>
+    <script>
+        var temp_msg = "";
+
+
+        function receivedData(msg){
+            temp_msg = "Data saved: "+msg;
+            alert(msg);
+        }
+
+        function sendMessage(msgToSend){
+            $.ajax({
+                type: "POST",
+                data: msgToSend
+            }).done(function(returnData){
+                        rtn_msg=returnData;
+                    })
+        }
+
+        var context;
+        var canvas;
+        function main(){
+            canvas = $('#canvas');
+            canvas.width = $(window).width();
+            canvas.height = $(window).height();
+            canvas.css('background-color','#000000');
+            context = canvas.getContext('2d');
+            $('#target').mousedown(            })
+            window.requestAnimationFrame(drawLoop,canvas);
+        }
+
+        function drawLoop(){
+            context.fillStyle="rgb(0,0,0)";
+            context.fillRect(0,0,canvas.width,canvas.height);
+            context.fillStyle="white";
+            context.fillText(temp_msg,10,10);
+            window.requestAnimationFrame(drawLoop,canvas);
+        }
+
+    </script>
+</head>
+<body>
+<h1>mmmmmmm.</h1>
+<canvas id="canvas"></canvas>
+<div id="r1"></div>
+<script>
+    main();
+</script>
+<input type="button" text="clicksy" />
+</body>
+</html>
