@@ -25,4 +25,6 @@ typedef enum
 
 -(id) initWithCountry:(Country*) country soldierType: (SoldierType) soldierType;
 
++(BOOL) isValidBonusSet:(SoldierCard *)card1 :(SoldierCard *)card2 :(SoldierCard *)card3;
+
 @end

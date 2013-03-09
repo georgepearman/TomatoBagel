@@ -18,8 +18,11 @@
 @property NSMutableArray* connectedCountries;
 @property Player* owner;
 
+@property int numSoldiers;
+
 - (id) initWithName: (NSString*) name;
 - (void) connectToCountry: (Country*) countries;
+- (void) addSoldiers: (int) number;
 
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EAFC47216EAFF76005CF75C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47116EAFF76005CF75C /* Message.m */; };
+		5EAFC47616EB060A005CF75C /* GiveSoldierMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */; };
 		5ED9A88916EAD23C0061605E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED9A88816EAD23C0061605E /* Foundation.framework */; };
 		5ED9A88C16EAD23C0061605E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A88B16EAD23C0061605E /* main.m */; };
 		5ED9A89016EAD23C0061605E /* Risk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5ED9A88F16EAD23C0061605E /* Risk.1 */; };
@@ -30,6 +32,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5EAFC47016EAFF76005CF75C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		5EAFC47116EAFF76005CF75C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		5EAFC47416EB0609005CF75C /* GiveSoldierMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveSoldierMessage.h; sourceTree = "<group>"; };
+		5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveSoldierMessage.m; sourceTree = "<group>"; };
 		5ED9A88516EAD23C0061605E /* Risk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Risk; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED9A88816EAD23C0061605E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5ED9A88B16EAD23C0061605E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,6 +63,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5EAFC47316EB0556005CF75C /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				5EAFC47416EB0609005CF75C /* GiveSoldierMessage.h */,
+				5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */,
+				5EAFC47016EAFF76005CF75C /* Message.h */,
+				5EAFC47116EAFF76005CF75C /* Message.m */,
+			);
+			name = Communication;
+			path = Communications;
+			sourceTree = "<group>";
+		};
 		5ED9A87C16EAD23C0061605E = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +110,7 @@
 				5ED9A8B416EAD81D0061605E /* Player.m */,
 				5ED9A8B616EAD8C50061605E /* RiskModel.h */,
 				5ED9A8B716EAD8C50061605E /* RiskModel.m */,
+				5EAFC47316EB0556005CF75C /* Communication */,
 				5ED9A8B916EADA0C0061605E /* SoldierCard.h */,
 				5ED9A8BA16EADA0C0061605E /* SoldierCard.m */,
 				5ED9A88F16EAD23C0061605E /* Risk.1 */,
@@ -164,6 +183,8 @@
 				5ED9A8B516EAD81D0061605E /* Player.m in Sources */,
 				5ED9A8B816EAD8C50061605E /* RiskModel.m in Sources */,
 				5ED9A8BB16EADA0C0061605E /* SoldierCard.m in Sources */,
+				5EAFC47216EAFF76005CF75C /* Message.m in Sources */,
+				5EAFC47616EB060A005CF75C /* GiveSoldierMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +287,7 @@
 				5ED9A89516EAD23C0061605E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

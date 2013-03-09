@@ -23,4 +23,22 @@
     return self;
 }
 
++(BOOL) isValidBonusSet:(SoldierCard *)card1 :(SoldierCard *)card2 :(SoldierCard *)card3
+{
+    if ( card1.country == card2.country && card2.country == card3.country && card3.country == card1.country )
+    {
+        return true;
+    }
+    
+    if ( card1.soldierType == card2.soldierType && card2.soldierType == card3.soldierType && card3.soldierType == card1.soldierType )
+    {
+        return true;
+    }
+    
+    if ( card1.soldierType != card2.soldierType && card2.soldierType != card3.soldierType && card3.soldierType != card1.soldierType )
+    {
+        return true;
+    }
+}
+
 @end

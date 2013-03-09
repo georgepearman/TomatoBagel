@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SoldierCard.h"
 
+@class SoldierCard;
 @interface Player : NSObject
 
 @property NSMutableArray* ownedCountries;
+@property NSMutableArray* ownedSoldierCards;
 
-
+- (void) giveSoldierCard: (SoldierCard*) soldierCard;
+- (void) takeSoldierCard: (SoldierCard*) soldierCard;
 
 @end

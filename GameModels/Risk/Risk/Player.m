@@ -10,4 +10,15 @@
 
 @implementation Player
 
+- (void) giveSoldierCard: (SoldierCard*) soldierCard
+{
+    [self.ownedSoldierCards addObject:soldierCard];
+}
+
+- (void) takeSoldierCard:(SoldierCard *)soldierCard
+{
+    [self.ownedSoldierCards removeObject:soldierCard];
+}
+
+
 @end

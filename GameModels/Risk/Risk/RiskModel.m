@@ -294,4 +294,49 @@
 
 
 
+//  B1
+- (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3
+{
+    if( [SoldierCard isValidBonusSet:card1 :card2 :card3] )
+    {
+        //  take away soldier cards from the player
+        [player takeSoldierCard:card1];
+        [player takeSoldierCard:card2];
+        [player takeSoldierCard:card3];
+        
+        //  add the soldier cards back into the unused soldier card pool
+        [self.unusedSoldierCards addObject:card1];
+        [self.unusedSoldierCards addObject:card2];
+        [self.unusedSoldierCards addObject:card3];
+        
+        //  make a message to return
+        Message* message = [[GiveSoldierMessage alloc] initWithSoldiers:self.SoldierCardBonus ToGiveToPlayer:player];
+        
+        //  increase the bonus for the next set that is turned in
+        [self increaseSoldierCardBonus];
+        
+        return message;
+    }
+    
+    //  otherwise they tried to turn in an invalid set
+    return [[Message alloc] initAsInvalidCommand];
+}
+
+- (void) increaseSoldierCardBonus
+{
+    if ( self.SoldierCardBonus < 12 )
+    {
+        self.SoldierCardBonus += 2;
+    }
+    else if ( self.SoldierCardBonus == 12 )
+    {
+        self.SoldierCardBonus = 15;
+    }
+    else
+    {
+        self.SoldierCardBonus += 5;
+    }
+}
+
+
 @end

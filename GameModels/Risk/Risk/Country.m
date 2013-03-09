@@ -28,4 +28,9 @@
     [self.connectedCountries addObject:country];
 }
 
+-(void) addSoldiers:(int)number
+{
+    self.numSoldiers += number;
+}
+
 @end

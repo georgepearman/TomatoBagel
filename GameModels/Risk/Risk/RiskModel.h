@@ -10,6 +10,8 @@
 #import "Country.h"
 #import "Player.h"
 #import "SoldierCard.h"
+#import "Message.h"
+#import "GiveSoldierMessage.h"
 
 @interface RiskModel : NSObject
 
@@ -17,6 +19,8 @@
 
 @property NSMutableArray* unusedSoldierCards;
 @property NSMutableArray* countries;
+
+@property int SoldierCardBonus;
 
 //  For setting up a new game
 - (id) initWithNewGame;
@@ -29,6 +33,13 @@
 - (SoldierCard*) getRandomSoldierCard;
 
 - (id) initWithDataFile: (NSString*) dataFileName andMessage: (NSString*) message;
+
+
+//  B1
+- (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3;
+- (void) increaseSoldierCardBonus;
+///////
+
 
 - (BOOL) populateModelWithFileData;
 
