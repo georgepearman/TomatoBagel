@@ -9,19 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "Country.h"
 
+@class Country;
+
 typedef enum
 {
     SOLDIER,
     HORSE,
-    CANNON
+    CANNON,
 } SoldierType;
-
 
 @interface SoldierCard : NSObject
 
-@property Country* country;
 @property SoldierType soldierType;
+@property Country* country;
 
-- (id) initWithCountry: (Country*) country soldierType: (SoldierType) soldierType;
+-(id) initWithCountry:(Country*) country soldierType: (SoldierType) soldierType;
 
 @end
