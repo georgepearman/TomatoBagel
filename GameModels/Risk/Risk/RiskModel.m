@@ -338,11 +338,11 @@
 
 
 
-//  B1
-- (Message*) didRecieveNextPlayerTurn:(Player *)player
+//  B1  //
+- (Message*) didReceiveNextPlayerTurn:(Player *)player
 {
-    player.soldiersToPlace = [self regularTurnCardsForPlayer:player];
-    return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
+    player.soldiersToPlaceOnBoard = [self regularTurnCardsForPlayer:player];
+    return [self getHowManySoldiersLeftToPlaceOrNextPhaseMessageForPlayer:player];
 }
 - (int) regularTurnCardsForPlayer:(Player *)player
 {
@@ -402,7 +402,7 @@
         return 7;
     }
 }
-- (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3
+- (Message*) didReceiveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3
 {
     if( [SoldierCard isValidBonusSet:card1 :card2 :card3] )
     {
@@ -416,14 +416,13 @@
         [self.unusedSoldierCards addObject:card2];
         [self.unusedSoldierCards addObject:card3];
         
-        //  make a message to return
-        player.soldiersToPlace += self.SoldierCardBonus;
-        Message* message = [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
+        player.soldiersToPlaceOnBoard += self.SoldierCardBonus;
         
         //  increase the bonus for the next set that is turned in
         [self increaseSoldierCardBonus];
         
-        return message;
+        
+        return [self getHowManySoldiersLeftToPlaceOrNextPhaseMessageForPlayer:player];
     }
     
     //  otherwise they tried to turn in an invalid set
@@ -445,17 +444,96 @@
         self.SoldierCardBonus += 5;
     }
 }
-- (Message*) didRecievePlaceSoldierInCountry:(Country *)country fromPlayer:(Player *)player
+- (Message*) didReceivePlaceSoldierInCountry:(Country *)country fromPlayer:(Player *)player
 {
-    if ( country.owner != player || player.soldiersToPlace == 0 )
+    if ( country.owner != player || player.soldiersToPlaceOnBoard == 0 )
     {
         return [[Message alloc] initAsInvalidCommand];
     }
     
     country.numSoldiers++;
-    player.soldiersToPlace--;
-    return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
+    player.soldiersToPlaceOnBoard--;
+    return [self getHowManySoldiersLeftToPlaceOrNextPhaseMessageForPlayer:player];
 }
+- (Message*) getHowManySoldiersLeftToPlaceOrNextPhaseMessageForPlayer:(Player *)player
+{
+    if ( player.soldiersToPlaceOnBoard == 0 )
+    {
+        //  move to next phase once zero left
+        return [[ChooseACountryToAttackMessage alloc] initForPlayer:player];
+    }
+    return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlaceOnBoard ToGiveToPlayer:player];
+}
+//////////
+
+
+//  B2  //
+- (Message*) didReceiveAttackFromPlayer:(Player *)player countryA:(Country *)countryA countryB:(Country *)countryB
+{
+    Country* attacker;
+    Country* defender;
+    
+    if ( countryA.owner == player )
+    {
+        attacker = countryA;
+        defender = countryB;
+    }
+    else
+    {
+        attacker = countryB;
+        defender = countryA;
+    }
+
+    //  if a player owns neither country or both, its invalid
+    if ( attacker.owner != player || defender.owner == player )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    
+    return [[HowManyDiceToAttackWithMessage alloc] initWithAskingPlayer:player andMaxDice:[self getMaxNumberOfAttackDiceFromCountry:attacker]];
+}
+- (int) getMaxNumberOfAttackDiceFromCountry:(Country *)country
+{
+    return ( country.numSoldiers > 3 ) ? 3: country.numSoldiers;
+}
+//////////
+
+//  B3  //
+- (Message*) didReceiveMove:(int)numberOfTroopsToMove TroopsFromCountry:(Country *)countryA toCountry:(Country *)countryB
+{
+    if ( countryA.owner != countryB.owner || numberOfTroopsToMove >= countryA.numSoldiers || ![self country:countryA isConnectedTo:countryB] )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    
+    countryA.numSoldiers -= numberOfTroopsToMove;
+    countryB.numSoldiers += numberOfTroopsToMove;
+    
+    return [self didFinishMovingTroops:countryA.owner];
+}
+- (BOOL) country:(Country *)countryA isConnectedTo:(Country *)countryB
+{
+    //  if both countries are the same, theyre obviously connected
+    if ( countryA == countryB )
+    {
+        return true;
+    }
+    
+    for ( Country* country in countryA.connectedCountries )
+    {
+        //  otherwise, if a neighbor of A owned by same owner is connected to B, they are connected
+        if ( countryA.owner == country.owner && [self country:country isConnectedTo:countryB] )
+        {
+            return true;
+        }
+    }
+    return false;
+}
+- (Message*) didFinishMovingTroops:(Player *)player
+{
+    
+}
+//////////
 
 
 @end

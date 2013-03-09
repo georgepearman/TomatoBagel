@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5EAFC47216EAFF76005CF75C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47116EAFF76005CF75C /* Message.m */; };
 		5EAFC47616EB060A005CF75C /* GiveSoldierMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */; };
+		5EAFC47916EB1FED005CF75C /* ChooseACountryToAttackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47816EB1FED005CF75C /* ChooseACountryToAttackMessage.m */; };
+		5EAFC47D16EB256B005CF75C /* HowManyDiceToAttackWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47C16EB256B005CF75C /* HowManyDiceToAttackWithMessage.m */; };
 		5ED9A88916EAD23C0061605E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED9A88816EAD23C0061605E /* Foundation.framework */; };
 		5ED9A88C16EAD23C0061605E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A88B16EAD23C0061605E /* main.m */; };
 		5ED9A89016EAD23C0061605E /* Risk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5ED9A88F16EAD23C0061605E /* Risk.1 */; };
@@ -36,6 +38,11 @@
 		5EAFC47116EAFF76005CF75C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		5EAFC47416EB0609005CF75C /* GiveSoldierMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiveSoldierMessage.h; sourceTree = "<group>"; };
 		5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiveSoldierMessage.m; sourceTree = "<group>"; };
+		5EAFC47716EB1FED005CF75C /* ChooseACountryToAttackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseACountryToAttackMessage.h; sourceTree = "<group>"; };
+		5EAFC47816EB1FED005CF75C /* ChooseACountryToAttackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseACountryToAttackMessage.m; sourceTree = "<group>"; };
+		5EAFC47A16EB20E7005CF75C /* AllMessageImports.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AllMessageImports.h; path = Risk/Communications/AllMessageImports.h; sourceTree = SOURCE_ROOT; };
+		5EAFC47B16EB256B005CF75C /* HowManyDiceToAttackWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowManyDiceToAttackWithMessage.h; sourceTree = "<group>"; };
+		5EAFC47C16EB256B005CF75C /* HowManyDiceToAttackWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowManyDiceToAttackWithMessage.m; sourceTree = "<group>"; };
 		5ED9A88516EAD23C0061605E /* Risk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Risk; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED9A88816EAD23C0061605E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5ED9A88B16EAD23C0061605E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -66,6 +73,11 @@
 		5EAFC47316EB0556005CF75C /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				5EAFC47A16EB20E7005CF75C /* AllMessageImports.h */,
+				5EAFC47716EB1FED005CF75C /* ChooseACountryToAttackMessage.h */,
+				5EAFC47816EB1FED005CF75C /* ChooseACountryToAttackMessage.m */,
+				5EAFC47B16EB256B005CF75C /* HowManyDiceToAttackWithMessage.h */,
+				5EAFC47C16EB256B005CF75C /* HowManyDiceToAttackWithMessage.m */,
 				5EAFC47416EB0609005CF75C /* GiveSoldierMessage.h */,
 				5EAFC47516EB0609005CF75C /* GiveSoldierMessage.m */,
 				5EAFC47016EAFF76005CF75C /* Message.h */,
@@ -185,6 +197,8 @@
 				5ED9A8BB16EADA0C0061605E /* SoldierCard.m in Sources */,
 				5EAFC47216EAFF76005CF75C /* Message.m in Sources */,
 				5EAFC47616EB060A005CF75C /* GiveSoldierMessage.m in Sources */,
+				5EAFC47916EB1FED005CF75C /* ChooseACountryToAttackMessage.m in Sources */,
+				5EAFC47D16EB256B005CF75C /* HowManyDiceToAttackWithMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

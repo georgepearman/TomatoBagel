@@ -7,7 +7,6 @@
 //
 
 #import "Message.h"
-#import "Player.h"
 
 @interface GiveSoldierMessage : Message
 

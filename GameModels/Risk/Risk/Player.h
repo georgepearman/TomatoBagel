@@ -17,7 +17,7 @@
 
 @property Player* nextPlayer;
 
-@property int soldiersToPlace;
+@property int soldiersToPlaceOnBoard;
 
 - (void) giveSoldierCard: (SoldierCard*) soldierCard;
 - (void) takeSoldierCard: (SoldierCard*) soldierCard;

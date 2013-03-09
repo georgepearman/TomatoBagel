@@ -10,8 +10,8 @@
 #import "Country.h"
 #import "Player.h"
 #import "SoldierCard.h"
-#import "Message.h"
-#import "GiveSoldierMessage.h"
+#import "AllMessageImports.h"
+
 
 @interface RiskModel : NSObject
 
@@ -36,16 +36,24 @@
 
 
 //  B1  //
-- (Message*) didRecieveNextPlayerTurn: (Player*) player;
+- (Message*) didReceiveNextPlayerTurn: (Player*) player;
 - (int) regularTurnCardsForPlayer: (Player*) player;
 - (int) getBonusForContinent: (Continent) continent;
-- (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3;
+- (Message*) didReceiveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3;
 - (void) increaseSoldierCardBonus;
-- (Message*) didRecievePlaceSoldierInCountry: (Country*) country fromPlayer: (Player*) player;
+- (Message*) didReceivePlaceSoldierInCountry: (Country*) country fromPlayer: (Player*) player;
+- (Message*) getHowManySoldiersLeftToPlaceOrNextPhaseMessageForPlayer: (Player*) player;
 //////////
 
 //  B2  //
+- (Message*) didReceiveAttackFromPlayer: (Player*) player countryA: (Country*) countryA countryB: (Country*) countryB;
+- (int) getMaxNumberOfAttackDiceFromCountry: (Country*) country;
+//////////
 
+//  B3  //
+- (Message*) didReceiveMove: (int) numberOfTroopsToMove TroopsFromCountry: (Country*) countryA toCountry: (Country*) countryB;
+- (BOOL) country: (Country*) countryA isConnectedTo: (Country*) countryB;
+- (Message*) didFinishMovingTroops: (Player*) player;
 //////////
 
 - (BOOL) populateModelWithFileData;
