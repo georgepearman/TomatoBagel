@@ -14,7 +14,7 @@
 
 @property NSMutableArray* ownedCountries;
 @property NSMutableArray* ownedSoldierCards;
-
+@property int PlayerNumber;
 @property Player* nextPlayer;
 
 @property int soldiersToPlaceOnBoard;

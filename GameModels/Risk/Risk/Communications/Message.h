@@ -7,16 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Player.h"
 
+@class RiskModel;
+@class Player;
 @interface Message : NSObject
 
-@property NSString* message;
+@property NSMutableString* message;
 @property BOOL invalid;
 
 
 - (id) initAsInvalidCommand;
-- (void) encodeMessage;
+- (void) encodeMessageWithModel: (RiskModel*) model;
+
+- (void) addCountryDataToMessageFromModel: (RiskModel*) model;
 
 
 

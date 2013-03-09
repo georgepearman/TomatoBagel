@@ -38,5 +38,7 @@ typedef enum
 
 - (void) addSoldiers: (int) number;
 
+- (NSString*) getCountryData;
+
 
 @end

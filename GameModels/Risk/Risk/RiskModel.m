@@ -394,6 +394,24 @@
 
 
 
+- (NSString*) getAllCountryData
+{
+    NSMutableString* result = [[NSMutableString alloc] init];
+    for ( Country* country in self.countries )
+    {
+        [result appendString:[country getCountryData]];
+    }
+    
+    return result;
+}
+
+
+
+
+
+
+
+
 //  B1  //
 - (Message*) didReceiveNextPlayerTurn:(Player *)player
 {

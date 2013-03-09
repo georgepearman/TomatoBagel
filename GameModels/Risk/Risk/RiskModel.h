@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Country.h"
-#import "Player.h"
-#import "SoldierCard.h"
 #import "AllMessageImports.h"
 
-
+@class Message;
 @interface RiskModel : NSObject
 
 @property NSString* dataFileName;
@@ -38,6 +36,12 @@
 - (void) encodeWithCoder: (NSCoder * ) coder;
 - (id) initWithDataFile: (NSString*) dataFilePath andMessage: (Message*) message;
 ////////
+
+//  For sending messages to screen
+- (NSString*) getAllCountryData;
+
+
+///////
 
 //  For regular game play.
 - (SoldierCard*) getRandomSoldierCard;

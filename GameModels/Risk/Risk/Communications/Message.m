@@ -7,6 +7,7 @@
 //
 
 #import "Message.h"
+#import "RiskModel.h"
 
 @implementation Message
 
@@ -35,6 +36,16 @@
     return self;
 }
 
+- (void) encodeMessageWithModel:(RiskModel *)model
+{
+    
+}
+
+
+- (void) addCountryDataToMessageFromModel:(RiskModel *)model
+{
+    [self.message appendString:[model getAllCountryData]];
+}
 
 
 @end

@@ -9,11 +9,10 @@
 #ifndef Risk_AllMessageImports_h
 #define Risk_AllMessageImports_h
 
-#import "Message.h"
+
 #import "GiveSoldierMessage.h"
 #import "ChooseAB2Move.h"
 #import "HowManyDiceToUse.h"
 #import "MoveTroopsToKilledCountryMessage.h"
-
 
 #endif

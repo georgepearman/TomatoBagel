@@ -63,6 +63,11 @@
     return self;
 }
 
+- (NSString*) getCountryData
+{
+    return [NSString stringWithFormat:@"@%@:%i:%i", self.name, self.owner.PlayerNumber, self.numSoldiers];
+}
+
 
 
 
