@@ -123,8 +123,7 @@ function composeMessage()
 		if(determineAction(X,Y) != false)
 		{
 			composedmessage += determineAction(X,Y) + "@";	
-			encodeMessage(composedmessage);
-			sendMessage(composedmessage);
+			sendMessage(encodeMessage(composedmessage));
 			updateDebug(X,Y,composedmessage);
 			bool = false;
 			window.cancelAnimationFrame();
