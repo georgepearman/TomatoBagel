@@ -12,6 +12,8 @@
 @class SoldierCard;
 @interface Player : NSObject
 
+@property int beginningTroops;
+
 @property NSMutableArray* ownedCountries;
 @property NSMutableArray* ownedSoldierCards;
 @property int PlayerNumber;

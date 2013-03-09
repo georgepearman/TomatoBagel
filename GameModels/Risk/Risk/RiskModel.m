@@ -31,46 +31,46 @@
 {
     Country* Alaska = [[Country alloc] initWithName: @"Alaska"];
     Country* Alberta = [[Country alloc] initWithName: @"Alberta"];
-    Country* CentralAmerica = [[Country alloc] initWithName: @"Central America"];
-    Country* EasternUnitedStates = [[Country alloc] initWithName: @"Eastern United States"];
+    Country* CentralAmerica = [[Country alloc] initWithName: @"CentralAmerica"];
+    Country* EasternUnitedStates = [[Country alloc] initWithName: @"EasternUnitedStates"];
     Country* Greenland = [[Country alloc] initWithName: @"Greenland"];
-    Country* NorthwestTerritory = [[Country alloc] initWithName: @"Northwest Territory"];
+    Country* NorthwestTerritory = [[Country alloc] initWithName: @"NorthwestTerritory"];
     Country* Ontario = [[Country alloc] initWithName: @"Ontario"];
     Country* Quebec = [[Country alloc] initWithName: @"Quebec"];
-    Country* WesternUnitedStates = [[Country alloc] initWithName: @"Western United States"];
+    Country* WesternUnitedStates = [[Country alloc] initWithName: @"WesternUnited States"];
     Country* Argentina = [[Country alloc] initWithName: @"Argentina"];
     Country* Brazil = [[Country alloc] initWithName: @"Brazil"];
     Country* Peru = [[Country alloc] initWithName: @"Peru"];
     Country* Venezeula = [[Country alloc] initWithName: @"Venezeula"];
-    Country* GreatBritain = [[Country alloc] initWithName: @"Great Britain"];
+    Country* GreatBritain = [[Country alloc] initWithName: @"GreatBritain"];
     Country* Iceland = [[Country alloc] initWithName: @"Iceland"];
-    Country* NorthernEurope = [[Country alloc] initWithName: @"Northern Europe"];
+    Country* NorthernEurope = [[Country alloc] initWithName: @"NorthernEurope"];
     Country* Scandinavia = [[Country alloc] initWithName: @"Scandinavia"];
-    Country* SouthernEurope = [[Country alloc] initWithName: @"Southern Europe"];
+    Country* SouthernEurope = [[Country alloc] initWithName: @"SouthernEurope"];
     Country* Ukraine = [[Country alloc] initWithName: @"Ukraine"];
-    Country* WesternEurope = [[Country alloc] initWithName: @"Western Europe"];
+    Country* WesternEurope = [[Country alloc] initWithName: @"WesternEurope"];
     Country* Congo = [[Country alloc] initWithName: @"Congo"];
-    Country* EastAfrica = [[Country alloc] initWithName: @"East Africa"];
+    Country* EastAfrica = [[Country alloc] initWithName: @"EastAfrica"];
     Country* Egypt = [[Country alloc] initWithName: @"Egypt"];
     Country* Madagascar = [[Country alloc] initWithName: @"Madagascar"];
-    Country* NorthAfrica = [[Country alloc] initWithName: @"North Africa"];
-    Country* SouthAfrica = [[Country alloc] initWithName: @"South Africa"];
+    Country* NorthAfrica = [[Country alloc] initWithName: @"NorthAfrica"];
+    Country* SouthAfrica = [[Country alloc] initWithName: @"SouthAfrica"];
     Country* Afghanistan = [[Country alloc] initWithName: @"Afghanistan"];
     Country* China = [[Country alloc] initWithName: @"China"];
     Country* India = [[Country alloc] initWithName: @"India"];
     Country* Irkutsk = [[Country alloc] initWithName: @"Irkutsk"];
     Country* Japan = [[Country alloc] initWithName: @"Japan"];
     Country* Kamchatka = [[Country alloc] initWithName: @"Kamchatka"];
-    Country* MiddleEast = [[Country alloc] initWithName: @"Middle East"];
+    Country* MiddleEast = [[Country alloc] initWithName: @"MiddleEast"];
     Country* Mongolia = [[Country alloc] initWithName: @"Mongolia"];
     Country* Siam = [[Country alloc] initWithName: @"Siam"];
     Country* Siberia = [[Country alloc] initWithName: @"Siberia"];
     Country* Ural = [[Country alloc] initWithName: @"Ural"];
     Country* Yakutsk = [[Country alloc] initWithName: @"Yakutsk"];
-    Country* EasternAustralia = [[Country alloc] initWithName: @"Eastern Australia"];
+    Country* EasternAustralia = [[Country alloc] initWithName: @"EasternAustralia"];
     Country* Indonesia = [[Country alloc] initWithName: @"Indonesia"];
-    Country* NewGuinea = [[Country alloc] initWithName: @"New Guinea"];
-    Country* WesternAustralia = [[Country alloc] initWithName: @"Western Australia"];
+    Country* NewGuinea = [[Country alloc] initWithName: @"NewGuinea"];
+    Country* WesternAustralia = [[Country alloc] initWithName: @"WesternAustralia"];
     
     [Alaska connectToCountry:Kamchatka];
     [Alaska connectToCountry:NorthwestTerritory];
@@ -407,7 +407,31 @@
 
 
 
-
+//  A  //
+- (Message*) didReceiveSoldierSelectionInCountry:(Country *) country fromPlayer :(Player *)player
+{
+    if ( player.beginningTroops == 0 )
+    {
+        //  we can start attacking people
+        return [[ChooseAB2Move alloc] initForPlayer:player];
+    }
+    
+    if ( country.numSoldiers > 0 && player != country.owner )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    else if ( country.numSoldiers > 0 )
+    {
+        country.numSoldiers++;
+        player.beginningTroops--;
+    }
+    else if ( country.numSoldiers == 0 )
+    {
+        country.owner = player;
+        country.numSoldiers = 1;
+    }
+    return [[GetNextAPhaseCountryPick alloc] initForPlayer:player.nextPlayer];
+}
 
 
 

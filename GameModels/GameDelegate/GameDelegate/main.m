@@ -13,8 +13,8 @@ int main(int argc, const char * argv[])
 
     @autoreleasepool {
         
-        // insert code here...
-        NSLog(@"Hello, World!");
+        NSString* output = [NSTask launchedTaskWithLaunchPath:@"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameModels/RunRisk" arguments:[NSArray arrayWithObject:[NSString stringWithFormat:@"%s", argv[0]]]];
+        NSLog(@"%@", output );
         
     }
     return 0;

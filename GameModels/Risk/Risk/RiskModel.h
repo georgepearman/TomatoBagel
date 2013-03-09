@@ -47,6 +47,8 @@
 - (SoldierCard*) getRandomSoldierCard;
 
 
+//  A  //
+- (Message*) didReceiveSoldierSelectionInCountry: (Country*) country fromPlayer: (Player*) player;
 
 
 //  B1  //

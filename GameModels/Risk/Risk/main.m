@@ -14,8 +14,7 @@ int main(int argc, const char * argv[])
 
     @autoreleasepool {
         
-        
+        printf("%s\n", argv[1]);
     }
     return 0;
 }
-

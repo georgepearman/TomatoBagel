@@ -18,6 +18,7 @@
     {
         self.name = name;
         self.connectedCountries = [[NSMutableArray alloc] init];
+        self.numSoldiers = 0;
     }
     
     return self;
