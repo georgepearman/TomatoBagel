@@ -28,6 +28,13 @@
 - (void) initSoldierCards;
 ////////
 
+//  For storing game state
+@property Country* attacker;
+@property Country* defender;
+@property int attackRolls;
+@property int defendRolls;
+@property BOOL givenCardForThisRound;
+////////
 
 //  For regular game play.
 - (SoldierCard*) getRandomSoldierCard;
@@ -48,6 +55,13 @@
 //  B2  //
 - (Message*) didReceiveAttackFromPlayer: (Player*) player countryA: (Country*) countryA countryB: (Country*) countryB;
 - (int) getMaxNumberOfAttackDiceFromCountry: (Country*) country;
+- (int) getMaxNumberOfDefendDiceForCountry: (Country*) country;
+- (Message*) didReceiveNumberOfDiceToAttackWith: (int) numberOfDice;
+- (Message*) didReceiveNumberOfDiceToDefendWith: (int) numberOfDice;
+- (Message*) SimulateRollsWithAttackCount: (int) numAttacks fromCountry: (Country*) fromCountry andDefendCount: (int) numDefends toCountry: (Country*) toCountry;
+- (NSNumber*) getHighestNumberInArray: (NSMutableArray*) numberArray;
+- (Message*) didFinishSimulateRolls;
+- (Message*) didMoveTroopsToDefendedLocation: (int) numMoved;
 //////////
 
 //  B3  //

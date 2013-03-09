@@ -9,7 +9,7 @@
 #import "Message.h"
 #import "Player.h"
 
-@interface ChooseACountryToAttackMessage : Message
+@interface ChooseAB2Move : Message
 
 @property Player* player;
 

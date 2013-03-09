@@ -11,8 +11,9 @@
 
 #import "Message.h"
 #import "GiveSoldierMessage.h"
-#import "ChooseACountryToAttackMessage.h"
-#import "HowManyDiceToAttackWithMessage.h"
+#import "ChooseAB2Move.h"
+#import "HowManyDiceToUse.h"
+#import "MoveTroopsToKilledCountryMessage.h"
 
 
 #endif

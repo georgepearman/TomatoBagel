@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 George Pearman. All rights reserved.
 //
 
-#import "ChooseACountryToAttackMessage.h"
+#import "ChooseAB2Move.h"
 
-@implementation ChooseACountryToAttackMessage
+@implementation ChooseAB2Move
 
 - (id) initForPlayer:(Player *)player
 {

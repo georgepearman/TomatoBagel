@@ -8,7 +8,7 @@
 
 #import "Message.h"
 
-@interface HowManyDiceToAttackWithMessage : Message
+@interface HowManyDiceToUse : Message
 
 @property Player* player;
 @property int maxDice;

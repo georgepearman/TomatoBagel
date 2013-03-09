@@ -460,7 +460,7 @@
     if ( player.soldiersToPlaceOnBoard == 0 )
     {
         //  move to next phase once zero left
-        return [[ChooseACountryToAttackMessage alloc] initForPlayer:player];
+        return [[ChooseAB2Move alloc] initForPlayer:player];
     }
     return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlaceOnBoard ToGiveToPlayer:player];
 }
@@ -469,32 +469,130 @@
 
 //  B2  //
 - (Message*) didReceiveAttackFromPlayer:(Player *)player countryA:(Country *)countryA countryB:(Country *)countryB
-{
-    Country* attacker;
-    Country* defender;
-    
+{    
     if ( countryA.owner == player )
     {
-        attacker = countryA;
-        defender = countryB;
+        self.attacker = countryA;
+        self.defender = countryB;
     }
     else
     {
-        attacker = countryB;
-        defender = countryA;
+        self.attacker = countryB;
+        self.defender = countryA;
     }
 
     //  if a player owns neither country or both, its invalid
-    if ( attacker.owner != player || defender.owner == player )
+    if ( self.attacker.owner != player || self.defender.owner == player )
     {
         return [[Message alloc] initAsInvalidCommand];
     }
     
-    return [[HowManyDiceToAttackWithMessage alloc] initWithAskingPlayer:player andMaxDice:[self getMaxNumberOfAttackDiceFromCountry:attacker]];
+    return [[HowManyDiceToUse alloc] initWithAskingPlayer:player andMaxDice:[self getMaxNumberOfAttackDiceFromCountry:self.attacker]];
 }
 - (int) getMaxNumberOfAttackDiceFromCountry:(Country *)country
 {
     return ( country.numSoldiers > 3 ) ? 3: country.numSoldiers;
+}
+- (int) getMaxNumberOfDefendDiceForCountry:(Country *)country
+{
+   return ( country.numSoldiers > 2 ) ? 2: country.numSoldiers;
+}
+- (Message*) didReceiveNumberOfDiceToAttackWith:(int)numberOfDice
+{
+    if ( numberOfDice > [self getMaxNumberOfAttackDiceFromCountry:self.attacker] )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    
+    return [[HowManyDiceToUse alloc] initWithAskingPlayer:self.defender.owner andMaxDice:[self getMaxNumberOfDefendDiceForCountry:self.defender]];
+}
+- (Message*) didReceiveNumberOfDiceToDefendWith:(int)numberOfDice
+{
+    if ( numberOfDice > [self getMaxNumberOfDefendDiceForCountry:self.defender] )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+
+    return [self SimulateRollsWithAttackCount:self.attackRolls fromCountry:self.attacker andDefendCount:self.defendRolls toCountry:self.defender];
+}
+- (Message*) SimulateRollsWithAttackCount:(int)numAttacks fromCountry:(Country *)fromCountry andDefendCount:(int)numDefends toCountry:(Country *)toCountry
+{
+    NSMutableArray* attacks = [[NSMutableArray alloc] init];
+    NSMutableArray* defends = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < numAttacks; i++)
+    {
+        [attacks addObject:[NSNumber numberWithInt:arc4random() % 6 + 1]];
+    }
+    
+    for (int i = 0; i < numDefends; i++)
+    {
+        [defends addObject:[NSNumber numberWithInt:arc4random() % 6 + 1]];
+    }
+    
+    NSNumber* highestAttack;
+    NSNumber* highestDefend;
+    
+    while ( numDefends > 0 )
+    {
+        highestAttack = [self getHighestNumberInArray:attacks];
+        [attacks removeObject:highestAttack];
+        highestDefend = [self getHighestNumberInArray:defends];
+        [defends removeObject:highestDefend];
+        
+        if ( [highestAttack isGreaterThan:highestDefend] )
+        {
+            toCountry.numSoldiers--;
+        }
+        else
+        {
+            fromCountry.numSoldiers--;
+        }
+        numDefends--;
+    }
+    return [self didFinishSimulateRolls];
+}
+- (NSNumber*) getHighestNumberInArray:(NSMutableArray *)numberArray
+{
+    NSNumber* highest = [NSNumber numberWithInt:0];
+    for ( NSNumber* num in numberArray )
+    {
+        if ( [num isGreaterThan:highest] )
+        {
+            highest = num;
+        }
+    }
+    return highest;
+}
+- (Message*) didFinishSimulateRolls
+{
+    if ( self.defender.numSoldiers > 0 )
+    {
+        return [[ChooseAB2Move alloc] initForPlayer:self.attacker.owner];
+    }
+    else // we killed defender
+    {
+        return [[MoveTroopsToKilledCountryMessage alloc] initWithMaxTroopsToMove:self.attacker.numSoldiers - 1];
+    }
+}
+- (Message*) didMoveTroopsToDefendedLocation:(int)numMoved
+{
+    if ( numMoved == 0 )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    
+    self.defender.owner = self.attacker.owner;
+    self.defender.numSoldiers = numMoved;
+    self.attacker.numSoldiers -= numMoved;
+    
+    if ( !self.givenCardForThisRound )
+    {
+        self.givenCardForThisRound = true;
+        [self.defender.owner giveSoldierCard:[self getRandomSoldierCard]];
+    }
+    
+    return [[ChooseAB2Move alloc] initForPlayer:self.attacker.owner];
 }
 //////////
 
@@ -531,7 +629,8 @@
 }
 - (Message*) didFinishMovingTroops:(Player *)player
 {
-    
+    self.givenCardForThisRound = false;
+    [self didReceiveNextPlayerTurn:player.nextPlayer];
 }
 //////////
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 George Pearman. All rights reserved.
 //
 
-#import "HowManyDiceToAttackWithMessage.h"
+#import "HowManyDiceToUse.h"
 
-@implementation HowManyDiceToAttackWithMessage
+@implementation HowManyDiceToUse
 
 
 -(id) initWithAskingPlayer:(Player *)player andMaxDice:(int)maxDice
