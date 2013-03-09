@@ -10,4 +10,22 @@
 
 @implementation Country
 
+- (id) initWithName:(NSString *)name
+{
+    self = [super init];
+    
+    if ( self )
+    {
+        self.name = name;
+        self.connectedCountries = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+- (void) connectToCountry:(Country *)country
+{
+    [self.connectedCountries addObject:country];
+}
+
 @end
