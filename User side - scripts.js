@@ -7,11 +7,24 @@ var context;
 var pixeldata;
 var bool = false;
 var composedmessage = '';
+/*var ClickRangeOfCountryDict = {
+	[64,60,84,84]:"Alaska",
+	[106,99,168,129]:"Alberta",
+	[99,221,185,294]:"CentralAmerica",
+	[182,148,202,211]:"EasternUnitedStates",
+	[352,16,436,66]:"Greenland",
+	[127,59,219,84]:"NorthwestTerritory",
+	[168,96,200,129]:"Ontario",
+	[258,97,311,137]:"Quebec",
+	[86,142,141,194]:"WesternUnitedStates"
+};*/
 var ColorToCountryDict = {"808000":"Alaska","FFFF00":"Alberta","FFFF80":"CentralAmerica","E3D700":"EasternUnitedStates","F8EF00":"Greenland","505027":"NorthwestTerritory","949449":"Ontario","FFF133":"Quebec","B19C00":"WesternUnitedStates","FF0000":"Argentina","804040":"Brazil","800000":"Peru","FF8080":"Venezuela","004080":"GreatBritain","0000FF":"Iceland","00ABE1":"NorthernEurope","0080FF":"Scandinavia","4778CC":"SouthernEurope","000080":"Ukraine","006EAE":"WesternEurope","AE5700":"Congo","FF8000":'EastAfrica',"804000":"Egypt","F3A94E":"Madagascar","FF915B":"NorthAfrica","7A5841":"SouthAfrica","80FF80":"Afghanistan","008040":"China","008080":"India","81bc43":"Irkutsk","80FF00":"Japan","5D8156":"Kamchatka","008000":"MiddleEast","004000":"Mongolia","50B100":"Siam","008A20":"Siberia","2F5029":"Ural","005B38":"Yakutsk","400040":"EasternAustralia","8000FF":"Indonesia","8800C2":"NewGuinea","800040":"WesternAustralia"};
+var imgsource = 'http://myusername.beryl.feralhosting.com/DL/risk-board.png';
+
 
 function decodeMessage(message)
 {
-	PlayerID = 2;
+	PlayerID = 5;
 	currentPlayer = 3;
 }
 
@@ -33,6 +46,8 @@ function sendMessage(message)
 function CountryObject(n)
 {
 	this.name = name;
+	this.lowerBounds;
+	this.upperBounds;
 	this.owner;
 	this.numOfTroops;
 }
@@ -51,37 +66,6 @@ function clickReporter(e)
 
 }
 
-/**
-*
-*@param int X, int Y: the X and Y values of the click
-*@return string c: the color of the pixel at X Y
-*/
-
-function getColorOnClick(X,Y)
-{
-
-	//var c = context.getImageData(X, Y, 1, 1).data;
-	//document.getElementById("debug shit").innerHTML = X + " " + Y + " " + turnColorToHex(c);
-	return "FFFF80";
-
-
-}
-function turnColorToHex(c)
-{
-
-	var str = '';
-	for(var i = 0; i < c.length-1; i++)
-	{
-		str += numToHex(c[i]);
-	}
-
-}
-function numToHex(num)
-{
-
-	return num.toString(16);
-
-}
 function getColor()
 {
 	switch(PlayerID)
@@ -100,6 +84,21 @@ function getColor()
 			return "gray";
 	}
 }
+/**
+* a function that takes in a point and determines what country it applies to
+*@param x and y values
+*@return the string name of a country
+*/
+/*function convertAreaToCountry(X,Y)
+{
+	for (var key in ClickRangeOfCountryDict)
+	{
+		if(X > key[0] && X < key[2] && Y > key[1] && Y < key[3])
+		{
+			return ClickRangeOfCountryDict[key];
+		}
+	}
+}*/
 
 /**
 * loops until the user has given enough input to compose a message that is sent to Georgie Porgie 
@@ -109,7 +108,7 @@ function getColor()
 **/
 function composeMessage()
 {
-
+	document.getElementById("debug shitv2").innerHTML = "in composemessage";
 	if(bool)
 	{
 		if(determineAction(X,Y) != false)
@@ -124,7 +123,7 @@ function composeMessage()
 		}
 		else
 		{
-			composedmessage += convertColorToCountry(getColorOnClick(X,Y));
+			composedmessage += convertAreaToCountry(X,Y);
 			//composedmessage += ""+X+ " " + Y + "";
 			composedmessage +="@@@";
 			updateDebug(X,Y,composedmessage);
@@ -134,17 +133,6 @@ function composeMessage()
 	}
 
 	window.requestAnimationFrame(composeMessage);
-}
-
-/**
-* a function which matches a color to its country
-*	
-*@param a string which is a hex color 
-*@return an identifier of a country to be sent to george
-*/
-function convertColorToCountry(colorstring)
-{
-	return ColorToCountryDict[colorstring];
 }
 
 /**
@@ -227,9 +215,17 @@ function main()
 
 	//CREATE A WAY FOR USERS TO GIVE ME DATA
 	
-	$("GAMEBOARD").clickReporter(e){
+	$('#GAMEBOARD').click(function(e) {
+		X = event.pageX -10;
+		Y = event.pageY -50;
+		var ctx = this.getContext('2d');
+		context.fillStyle=getColor();
+		context.fillRect(X-5,Y-5,10,10);
+		//pixeldata = ctx.getImageData(X,Y,1,1).data;
+		updateDebug(X,Y,composedmessage);
+		bool = true;
+	});
 
-	} 
 	//canvas.addEventListener('click', clickReporter, false);
 	window.requestAnimationFrame(composeMessage);
 
