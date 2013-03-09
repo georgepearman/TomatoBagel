@@ -24,7 +24,7 @@ var imgsource = 'http://myusername.beryl.feralhosting.com/DL/risk-board.png';
 
 function decodeMessage(message)
 {
-	PlayerID = 5;
+	PlayerID = 1;
 	currentPlayer = 3;
 }
 
