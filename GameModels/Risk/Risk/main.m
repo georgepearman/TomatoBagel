@@ -7,14 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SoldierCard.h"
-#import "Country.h"
+#import "RiskModel.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
+        RiskModel* game = [[RiskModel alloc] initWithNewGame];
+        ((Country* )[game.countries objectAtIndex:0]).name = @"hahah";
         
+        if ([NSKeyedArchiver archiveRootObject:game toFile:@"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameData/data"] )
+        {
+            NSLog(@"yes");
+        }
+        else
+        {
+            NSLog(@"no");
+        }
+        
+        RiskModel* game2 = [[RiskModel alloc] initWithDataFile:@"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameData/data" andMessage:[[Message alloc] initAsInvalidCommand]];
+        
+        NSLog(@"%@", ((Country*) [game2.countries objectAtIndex:0]).name);
         
     }
     return 0;

@@ -38,4 +38,36 @@
     self.numSoldiers += number;
 }
 
+- (void) encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.name forKey:@"name"];    
+    [coder encodeObject:self.owner forKey:@"owner"];
+    [coder encodeInt:self.continent forKey:@"continent"];
+    [coder encodeInt:self.numSoldiers forKey:@"numSoldiers"];
+    
+    //  infinite loop?
+    NSLog(@"here");
+    [coder encodeObject:self.connectedCountries forKey:@"connectedCountries"];
+}
+
+- (id) initWithCoder: (NSCoder*) coder
+{
+    self = [super init];
+    
+    if( self )
+    {
+        self.name = [coder decodeObjectForKey:@"name"];
+        self.owner = [coder decodeObjectForKey:@"owner"];
+        self.continent = [coder decodeIntForKey:@"continent"];
+        self.numSoldiers = [coder decodeIntForKey:@"numSoldiers"];
+        
+        self.connectedCountries = [coder decodeObjectForKey:@"connectedCountries"];
+    }
+    
+    return self;
+}
+
+
+
+
 @end

@@ -11,7 +11,11 @@
 @implementation RiskModel
 
 
-
+- (id) initWithNewGame
+{
+    [self initCountryArray];
+    [self initSoldierCards];
+}
 - (void) initCountryArray
 {
     Country* Alaska = [[Country alloc] initWithName: @"Alaska"];
@@ -329,11 +333,58 @@
 }
 
 
-
-
--(id) initWithDataFile
+- (void) encodeWithCoder:(NSCoder *)coder
 {
+    [coder encodeObject:self.filePath forKey:@"filePath"];
+    [coder encodeObject:self.unusedSoldierCards forKey:@"unusedSoldierCards"];
+    [coder encodeObject:self.countries forKey:@"countries"];
+    [coder encodeInt:self.SoldierCardBonus forKey:@"SoldierCardBonus"];
+    [coder encodeObject:self.attacker forKey:@"attacker"];
+    [coder encodeObject:self.defender forKey:@"defender"];
+    [coder encodeInt:self.attackRolls forKey:@"attackRolls"];
+    [coder encodeInt:self.defendRolls forKey:@"defendRolls"];
+    [coder encodeBool:self.givenCardForThisRound forKey:@"givenCardForThisRound"];
+}
+
+- (id) initWithCoder: (NSCoder*) coder
+{
+    self = [super init];
     
+    if( self )
+    {
+        self.filePath = [coder decodeObjectForKey:@"filePath"];
+        self.unusedSoldierCards = [coder decodeObjectForKey:@"unusedSoldierCards"];
+        self.countries = [coder decodeObjectForKey:@"countries"];
+        self.attacker = [coder decodeObjectForKey:@"attacker"];
+        self.defender = [coder decodeObjectForKey:@"defender"];
+        
+        self.SoldierCardBonus = [coder decodeIntForKey:@"SoldierCardBonus"];
+        self.attackRolls = [coder decodeIntForKey:@"attackRolls"];
+        self.defendRolls = [coder decodeIntForKey:@"defendRolls"];
+        
+        self.givenCardForThisRound = [coder decodeBoolForKey:@"givenCardForThisRound"];
+    }
+    
+    return self;
+}
+
+- (void) exportToDataFile
+{
+    NSString* archivePath = @"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameData/data";
+    if( [NSKeyedArchiver archiveRootObject:self toFile:archivePath] )
+    {
+        NSLog(@"Success");
+    }
+    else
+    {
+        NSLog(@"fail");
+    }
+}
+
+-(id) initWithDataFile:(NSString *)dataFilePath andMessage:(Message *)message
+{
+    self = [NSKeyedUnarchiver unarchiveObjectWithFile:dataFilePath];
+    return self;
 }
 
 

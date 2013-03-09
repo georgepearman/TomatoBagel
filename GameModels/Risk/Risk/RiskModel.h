@@ -34,12 +34,15 @@
 @property int attackRolls;
 @property int defendRolls;
 @property BOOL givenCardForThisRound;
+-(void) exportToDataFile;
+- (void) encodeWithCoder: (NSCoder * ) coder;
+- (id) initWithDataFile: (NSString*) dataFilePath andMessage: (Message*) message;
 ////////
 
 //  For regular game play.
 - (SoldierCard*) getRandomSoldierCard;
 
-- (id) initWithDataFile: (NSString*) dataFileName andMessage: (NSString*) message;
+
 
 
 //  B1  //
@@ -69,11 +72,5 @@
 - (BOOL) country: (Country*) countryA isConnectedTo: (Country*) countryB;
 - (Message*) didFinishMovingTroops: (Player*) player;
 //////////
-
-- (BOOL) populateModelWithFileData;
-
-- (BOOL) pullMessage: (NSString*) message;
-
--(BOOL) exportToDataFile;
 
 @end

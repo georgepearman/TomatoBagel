@@ -23,6 +23,7 @@
     return self;
 }
 
+
 +(BOOL) isValidBonusSet:(SoldierCard *)card1 :(SoldierCard *)card2 :(SoldierCard *)card3
 {
     if ( card1.country == card2.country && card2.country == card3.country && card3.country == card1.country )
@@ -39,6 +40,25 @@
     {
         return true;
     }
+}
+
+- (void) encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.country forKey:@"country"];
+    [coder encodeInt:self.soldierType forKey:@"soldierType"];
+}
+
+- (id) initWithCoder: (NSCoder*) coder
+{
+    self = [super init];
+    
+    if( self )
+    {
+        self.country = [coder decodeObjectForKey:@"country"];
+        self.soldierType = [coder decodeIntForKey:@"soldierType"];
+    }
+    
+    return self;
 }
 
 @end
