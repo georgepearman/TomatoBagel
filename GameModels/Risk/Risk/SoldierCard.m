@@ -40,6 +40,7 @@
     {
         return true;
     }
+    return false;
 }
 
 - (void) encodeWithCoder:(NSCoder *)coder

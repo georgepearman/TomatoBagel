@@ -13,8 +13,19 @@
 
 - (id) initWithNewGame
 {
-    [self initCountryArray];
-    [self initSoldierCards];
+    self = [super init];
+    
+    if( self )
+    {
+        [self initCountryArray];
+        [self initSoldierCards];
+        
+        NSString *prefixString = @"RiskData";
+        NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString] ;
+        self.dataFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];        
+    }
+    
+    return self;
 }
 - (void) initCountryArray
 {
@@ -335,7 +346,7 @@
 
 - (void) encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:self.filePath forKey:@"filePath"];
+    [coder encodeObject:self.dataFileName forKey:@"dataFileName"];
     [coder encodeObject:self.unusedSoldierCards forKey:@"unusedSoldierCards"];
     [coder encodeObject:self.countries forKey:@"countries"];
     [coder encodeInt:self.SoldierCardBonus forKey:@"SoldierCardBonus"];
@@ -352,7 +363,7 @@
     
     if( self )
     {
-        self.filePath = [coder decodeObjectForKey:@"filePath"];
+        self.dataFileName = [coder decodeObjectForKey:@"dataFileName"];
         self.unusedSoldierCards = [coder decodeObjectForKey:@"unusedSoldierCards"];
         self.countries = [coder decodeObjectForKey:@"countries"];
         self.attacker = [coder decodeObjectForKey:@"attacker"];
@@ -370,15 +381,9 @@
 
 - (void) exportToDataFile
 {
-    NSString* archivePath = @"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameData/data";
-    if( [NSKeyedArchiver archiveRootObject:self toFile:archivePath] )
-    {
-        NSLog(@"Success");
-    }
-    else
-    {
-        NSLog(@"fail");
-    }
+    NSString* archivePathRoot = @"/Users/George/Dropbox/GithubRepos/TomatoBagel/GameData/";
+    NSString* fullPath = [NSString stringWithFormat:@"%@%@", archivePathRoot, self.dataFileName];
+    [NSKeyedArchiver archiveRootObject:self toFile:fullPath];
 }
 
 -(id) initWithDataFile:(NSString *)dataFilePath andMessage:(Message *)message
@@ -681,7 +686,7 @@
 - (Message*) didFinishMovingTroops:(Player *)player
 {
     self.givenCardForThisRound = false;
-    [self didReceiveNextPlayerTurn:player.nextPlayer];
+    return [self didReceiveNextPlayerTurn:player.nextPlayer];
 }
 //////////
 

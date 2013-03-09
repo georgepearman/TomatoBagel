@@ -44,9 +44,6 @@
     [coder encodeObject:self.owner forKey:@"owner"];
     [coder encodeInt:self.continent forKey:@"continent"];
     [coder encodeInt:self.numSoldiers forKey:@"numSoldiers"];
-    
-    //  infinite loop?
-    NSLog(@"here");
     [coder encodeObject:self.connectedCountries forKey:@"connectedCountries"];
 }
 
@@ -60,7 +57,6 @@
         self.owner = [coder decodeObjectForKey:@"owner"];
         self.continent = [coder decodeIntForKey:@"continent"];
         self.numSoldiers = [coder decodeIntForKey:@"numSoldiers"];
-        
         self.connectedCountries = [coder decodeObjectForKey:@"connectedCountries"];
     }
     

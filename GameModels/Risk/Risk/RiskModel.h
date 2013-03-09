@@ -15,7 +15,7 @@
 
 @interface RiskModel : NSObject
 
-@property NSString* filePath;
+@property NSString* dataFileName;
 
 @property NSMutableArray* unusedSoldierCards;
 @property NSMutableArray* countries;
