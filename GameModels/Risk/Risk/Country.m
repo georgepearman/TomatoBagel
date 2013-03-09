@@ -28,6 +28,11 @@
     [self.connectedCountries addObject:country];
 }
 
+- (void) putInContinent:(Continent)continent
+{
+    self.continent = continent;
+}
+
 -(void) addSoldiers:(int)number
 {
     self.numSoldiers += number;

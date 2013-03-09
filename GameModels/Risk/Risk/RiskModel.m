@@ -10,6 +10,8 @@
 
 @implementation RiskModel
 
+
+
 - (void) initCountryArray
 {
     Country* Alaska = [[Country alloc] initWithName: @"Alaska"];
@@ -58,30 +60,36 @@
     [Alaska connectToCountry:Kamchatka];
     [Alaska connectToCountry:NorthwestTerritory];
     [Alaska connectToCountry:Alberta];
+    [Alaska putInContinent:NORTH_AMERICA];
     
     [Alberta connectToCountry:Alaska];
     [Alberta connectToCountry:NorthwestTerritory];
     [Alberta connectToCountry:Ontario];
     [Alberta connectToCountry:WesternUnitedStates];
+    [Alberta putInContinent:NORTH_AMERICA];
     
     [CentralAmerica connectToCountry:WesternUnitedStates];
     [CentralAmerica connectToCountry:EasternUnitedStates];
     [CentralAmerica connectToCountry:Venezeula];
+    [CentralAmerica putInContinent:NORTH_AMERICA];
     
     [EasternUnitedStates connectToCountry:Ontario];
     [EasternUnitedStates connectToCountry:WesternUnitedStates];
     [EasternUnitedStates connectToCountry:CentralAmerica];
     [EasternUnitedStates connectToCountry:Quebec];
+    [EasternUnitedStates putInContinent:NORTH_AMERICA];
     
     [Greenland connectToCountry:Quebec];
     [Greenland connectToCountry:Ontario];
     [Greenland connectToCountry:NorthwestTerritory];
     [Greenland connectToCountry:Iceland];
+    [Greenland putInContinent:NORTH_AMERICA];
     
     [NorthwestTerritory connectToCountry:Alaska];
     [NorthwestTerritory connectToCountry:Alberta];
     [NorthwestTerritory connectToCountry:Ontario];
     [NorthwestTerritory connectToCountry:Greenland];
+    [NorthwestTerritory putInContinent:NORTH_AMERICA];
     
     [Ontario connectToCountry:Alberta];
     [Ontario connectToCountry:NorthwestTerritory];
@@ -89,51 +97,62 @@
     [Ontario connectToCountry:Quebec];
     [Ontario connectToCountry:EasternUnitedStates];
     [Ontario connectToCountry:WesternUnitedStates];
+    [Ontario putInContinent:NORTH_AMERICA];
     
     [Quebec connectToCountry:Ontario];
     [Quebec connectToCountry:EasternUnitedStates];
     [Quebec connectToCountry:Greenland];
+    [Quebec putInContinent:NORTH_AMERICA];
     
     [WesternUnitedStates connectToCountry:Alberta];
     [WesternUnitedStates connectToCountry:Ontario];
     [WesternUnitedStates connectToCountry:EasternUnitedStates];
     [WesternUnitedStates connectToCountry:CentralAmerica];
+    [WesternUnitedStates putInContinent:NORTH_AMERICA];
     
     [Argentina connectToCountry:Peru];
     [Argentina connectToCountry:Brazil];
+    [Argentina putInContinent:SOUTH_AMERICA];
     
     [Brazil connectToCountry:Peru];
     [Brazil connectToCountry:Venezeula];
     [Brazil connectToCountry:Argentina];
     [Brazil connectToCountry:NorthAfrica];
+    [Brazil putInContinent:SOUTH_AMERICA];
     
     [Peru connectToCountry:Argentina];
     [Peru connectToCountry:Brazil];
     [Peru connectToCountry:Venezeula];
+    [Peru putInContinent:SOUTH_AMERICA];
     
     [Venezeula connectToCountry:CentralAmerica];
     [Venezeula connectToCountry:Peru];
     [Venezeula connectToCountry:Brazil];
+    [Venezeula putInContinent:SOUTH_AMERICA];
     
     [GreatBritain connectToCountry:Iceland];
     [GreatBritain connectToCountry:Scandinavia];
     [GreatBritain connectToCountry:NorthernEurope];
     [GreatBritain connectToCountry:WesternEurope];
+    [GreatBritain putInContinent:EUROPE];
     
     [Iceland connectToCountry:Greenland];
     [Iceland connectToCountry:GreatBritain];
     [Iceland connectToCountry:Scandinavia];
+    [Iceland putInContinent:EUROPE];
     
     [NorthernEurope connectToCountry:GreatBritain];
     [NorthernEurope connectToCountry:Scandinavia];
     [NorthernEurope connectToCountry:Ukraine];
     [NorthernEurope connectToCountry:SouthernEurope];
     [NorthernEurope connectToCountry:WesternEurope];
+    [NorthernEurope putInContinent:EUROPE];
     
     [Scandinavia connectToCountry:Iceland];
     [Scandinavia connectToCountry:GreatBritain];
     [Scandinavia connectToCountry:NorthernEurope];
     [Scandinavia connectToCountry:Ukraine];
+    [Scandinavia putInContinent:EUROPE];
     
     [SouthernEurope connectToCountry:WesternEurope];
     [SouthernEurope connectToCountry:NorthernEurope];
@@ -141,6 +160,7 @@
     [SouthernEurope connectToCountry:MiddleEast];
     [SouthernEurope connectToCountry:Egypt];
     [SouthernEurope connectToCountry:NorthAfrica];
+    [SouthernEurope putInContinent:EUROPE];
     
     [Ukraine connectToCountry:Scandinavia];
     [Ukraine connectToCountry:NorthernEurope];
@@ -148,29 +168,35 @@
     [Ukraine connectToCountry:MiddleEast];
     [Ukraine connectToCountry:Afghanistan];
     [Ukraine connectToCountry:Ural];
+    [Ukraine putInContinent:EUROPE];
     
     [WesternEurope connectToCountry:NorthAfrica];
     [WesternEurope connectToCountry:GreatBritain];
     [WesternEurope connectToCountry:NorthernEurope];
     [WesternEurope connectToCountry:SouthernEurope];
+    [WesternEurope putInContinent:EUROPE];
     
     [Congo connectToCountry:NorthAfrica];
     [Congo connectToCountry:EastAfrica];
     [Congo connectToCountry:SouthAfrica];
+    [Congo putInContinent:SOUTH_AMERICA];
     
     [EastAfrica connectToCountry:Egypt];
     [EastAfrica connectToCountry:NorthAfrica];
     [EastAfrica connectToCountry:Congo];
     [EastAfrica connectToCountry:Madagascar];
     [EastAfrica connectToCountry:MiddleEast];
+    [EastAfrica putInContinent:SOUTH_AMERICA];
     
     [Egypt connectToCountry:NorthAfrica];
     [Egypt connectToCountry:EastAfrica];
     [Egypt connectToCountry:MiddleEast];
     [Egypt connectToCountry:SouthernEurope];
+    [Egypt putInContinent:SOUTH_AMERICA];
     
     [Madagascar connectToCountry:EastAfrica];
     [Madagascar connectToCountry:SouthAfrica];
+    [Madagascar putInContinent:SOUTH_AMERICA];
     
     [NorthAfrica connectToCountry:Brazil];
     [NorthAfrica connectToCountry:WesternEurope];
@@ -178,16 +204,19 @@
     [NorthAfrica connectToCountry:Egypt];
     [NorthAfrica connectToCountry:EastAfrica];
     [NorthAfrica connectToCountry:Congo];
+    [NorthAfrica putInContinent:SOUTH_AMERICA];
     
     [SouthAfrica connectToCountry:Congo];
     [SouthAfrica connectToCountry:EastAfrica];
     [SouthAfrica connectToCountry:Madagascar];
+    [SouthAfrica putInContinent:SOUTH_AMERICA];
     
     [Afghanistan connectToCountry:Ukraine];
     [Afghanistan connectToCountry:MiddleEast];
     [Afghanistan connectToCountry:India];
     [Afghanistan connectToCountry:China];
     [Afghanistan connectToCountry:Ural];
+    [Afghanistan putInContinent:ASIA];
     
     [China connectToCountry:Siam];
     [China connectToCountry:India];
@@ -195,25 +224,30 @@
     [China connectToCountry:Ural];
     [China connectToCountry:Siberia];
     [China connectToCountry:Mongolia];
+    [China putInContinent:ASIA];
     
     [India connectToCountry:MiddleEast];
     [India connectToCountry:Afghanistan];
     [India connectToCountry:China];
     [India connectToCountry:Siam];
+    [India putInContinent:ASIA];
     
     [Irkutsk connectToCountry:Siberia];
     [Irkutsk connectToCountry:Yakutsk];
     [Irkutsk connectToCountry:Kamchatka];
     [Irkutsk connectToCountry:Mongolia];
+    [Irkutsk putInContinent:ASIA];
     
     [Japan connectToCountry:Kamchatka];
     [Japan connectToCountry:Mongolia];
+    [Japan putInContinent:ASIA];
     
     [Kamchatka connectToCountry:Yakutsk];
     [Kamchatka connectToCountry:Alaska];
     [Kamchatka connectToCountry:Japan];
     [Kamchatka connectToCountry:Mongolia];
     [Kamchatka connectToCountry:Irkutsk];
+    [Kamchatka putInContinent:ASIA];
     
     [MiddleEast connectToCountry:EastAfrica];
     [MiddleEast connectToCountry:Egypt];
@@ -221,46 +255,56 @@
     [MiddleEast connectToCountry:Ukraine];
     [MiddleEast connectToCountry:Afghanistan];
     [MiddleEast connectToCountry:India];
+    [MiddleEast putInContinent:ASIA];
     
     [Mongolia connectToCountry:Japan];
     [Mongolia connectToCountry:Kamchatka];
     [Mongolia connectToCountry:Irkutsk];
     [Mongolia connectToCountry:Siberia];
     [Mongolia connectToCountry:China];
+    [Mongolia putInContinent:ASIA];
     
     [Siam connectToCountry:China];
     [Siam connectToCountry:India];
     [Siam connectToCountry:Indonesia];
+    [Siam putInContinent:ASIA];
     
     [Siberia connectToCountry:Ural];
     [Siberia connectToCountry:China];
     [Siberia connectToCountry:Mongolia];
     [Siberia connectToCountry:Irkutsk];
     [Siberia connectToCountry:Yakutsk];
+    [Siberia putInContinent:ASIA];
     
     [Ural connectToCountry:Ukraine];
     [Ural connectToCountry:Afghanistan];
     [Ural connectToCountry:China];
     [Ural connectToCountry:Siberia];
+    [Ural putInContinent:ASIA];
     
     [Yakutsk connectToCountry:Siberia];
     [Yakutsk connectToCountry:Irkutsk];
     [Yakutsk connectToCountry:Kamchatka];
+    [Yakutsk putInContinent:ASIA];
     
     [EasternAustralia connectToCountry:WesternAustralia];
     [EasternAustralia connectToCountry:NewGuinea];
+    [EasternAustralia putInContinent:AUSTRALIA];
     
     [Indonesia connectToCountry:Siam];
     [Indonesia connectToCountry:NewGuinea];
     [Indonesia connectToCountry:WesternAustralia];
+    [Indonesia putInContinent:AUSTRALIA];
     
     [NewGuinea connectToCountry:Indonesia];
     [NewGuinea connectToCountry:WesternAustralia];
     [NewGuinea connectToCountry:EasternAustralia];
+    [NewGuinea putInContinent:AUSTRALIA];
     
     [WesternAustralia connectToCountry:Indonesia];
     [WesternAustralia connectToCountry:NewGuinea];
     [WesternAustralia connectToCountry:EasternAustralia];
+    [WesternAustralia putInContinent:AUSTRALIA];
 
     self.countries = [NSMutableArray arrayWithObjects:Alaska, Alberta, CentralAmerica, EasternUnitedStates, Greenland, NorthwestTerritory, Ontario, Quebec, WesternUnitedStates, Argentina, Brazil, Peru, Venezeula, GreatBritain, Iceland, NorthernEurope, Scandinavia, SouthernEurope, Ukraine, WesternEurope, Congo, EastAfrica, Egypt, Madagascar, NorthAfrica, SouthAfrica, Afghanistan, China, India, Irkutsk, Japan, Kamchatka, MiddleEast, Mongolia, Siam, Siberia, Ural, Yakutsk, EasternAustralia, Indonesia, NewGuinea, WesternAustralia, nil];
 }
@@ -295,6 +339,69 @@
 
 
 //  B1
+- (Message*) didRecieveNextPlayerTurn:(Player *)player
+{
+    player.soldiersToPlace = [self regularTurnCardsForPlayer:player];
+    return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
+}
+- (int) regularTurnCardsForPlayer:(Player *)player
+{
+    Continent pastCont = NONE_CONT;
+    Player* pastOwner;
+    BOOL setMade = true;
+    int cardCount = 2; // everyone gets 2 cards per turn no matter what
+    
+    for ( Country* country in self.countries )
+    {
+        //  for the first country in the array
+        if ( pastCont == NONE_CONT )
+        {
+            pastOwner = country.owner;
+            pastCont = country.continent;
+        }
+        else if ( pastCont != country.continent )
+        {
+            //  we have started looking at a new continent
+            //  if setMade is true, means one person owns all continent countries
+            //  if this person is the desired person, increase count
+            if ( setMade && pastOwner == player )
+            {
+                cardCount += [self getBonusForContinent:pastCont];
+            }
+            pastCont = country.continent;
+            pastOwner = country.owner;
+            setMade = true;
+        }
+        else // same continent
+        {
+            if ( country.owner != pastOwner )
+            {
+                //  same continent but owners are different
+                setMade = false;
+            }
+        }
+    }
+    return cardCount;
+}
+- (int) getBonusForContinent:(Continent)continent
+{
+    if ( continent == SOUTH_AMERICA || continent == AUSTRALIA )
+    {
+        return 2;
+    }
+    else if ( continent == AFRICA )
+    {
+        return 3;
+    }
+    else if ( continent == EUROPE || NORTH_AMERICA )
+    {
+        return 5;
+    }
+    else if ( continent == ASIA )
+    {
+        return 7;
+    }
+}
 - (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3
 {
     if( [SoldierCard isValidBonusSet:card1 :card2 :card3] )
@@ -310,7 +417,8 @@
         [self.unusedSoldierCards addObject:card3];
         
         //  make a message to return
-        Message* message = [[GiveSoldierMessage alloc] initWithSoldiers:self.SoldierCardBonus ToGiveToPlayer:player];
+        player.soldiersToPlace += self.SoldierCardBonus;
+        Message* message = [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
         
         //  increase the bonus for the next set that is turned in
         [self increaseSoldierCardBonus];
@@ -336,6 +444,17 @@
     {
         self.SoldierCardBonus += 5;
     }
+}
+- (Message*) didRecievePlaceSoldierInCountry:(Country *)country fromPlayer:(Player *)player
+{
+    if ( country.owner != player || player.soldiersToPlace == 0 )
+    {
+        return [[Message alloc] initAsInvalidCommand];
+    }
+    
+    country.numSoldiers++;
+    player.soldiersToPlace--;
+    return [[GiveSoldierMessage alloc] initWithSoldiers:player.soldiersToPlace ToGiveToPlayer:player];
 }
 
 

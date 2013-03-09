@@ -35,11 +35,18 @@
 - (id) initWithDataFile: (NSString*) dataFileName andMessage: (NSString*) message;
 
 
-//  B1
+//  B1  //
+- (Message*) didRecieveNextPlayerTurn: (Player*) player;
+- (int) regularTurnCardsForPlayer: (Player*) player;
+- (int) getBonusForContinent: (Continent) continent;
 - (Message*) didRecieveCardUseMessageFromPlayer: (Player*) player WithCards: (SoldierCard*) card1: (SoldierCard*) card2: (SoldierCard*) card3;
 - (void) increaseSoldierCardBonus;
-///////
+- (Message*) didRecievePlaceSoldierInCountry: (Country*) country fromPlayer: (Player*) player;
+//////////
 
+//  B2  //
+
+//////////
 
 - (BOOL) populateModelWithFileData;
 

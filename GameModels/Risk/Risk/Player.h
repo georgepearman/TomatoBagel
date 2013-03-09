@@ -15,6 +15,10 @@
 @property NSMutableArray* ownedCountries;
 @property NSMutableArray* ownedSoldierCards;
 
+@property Player* nextPlayer;
+
+@property int soldiersToPlace;
+
 - (void) giveSoldierCard: (SoldierCard*) soldierCard;
 - (void) takeSoldierCard: (SoldierCard*) soldierCard;
 
