@@ -723,7 +723,7 @@
             return true;
         }
     }
-    return false;
+    return false; 
 }
 - (Message*) didFinishMovingTroops:(Player *)player
 {
