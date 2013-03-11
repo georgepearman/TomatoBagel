@@ -25,9 +25,17 @@ var ClickRangeOfCountryDict = [
 	[246,343,346,392,"Brazil"],
 	[299,403,399,465,"Brazil"]
 ];
+var currClickCoords = []; //coordinates of last click. empty if user is not currently clicking
 //var ColorToCountryDict = {"808000":"Alaska","FFFF00":"Alberta","FFFF80":"CentralAmerica","E3D700":"EasternUnitedStates","F8EF00":"Greenland","505027":"NorthwestTerritory","949449":"Ontario","FFF133":"Quebec","B19C00":"WesternUnitedStates","FF0000":"Argentina","804040":"Brazil","800000":"Peru","FF8080":"Venezuela","004080":"GreatBritain","0000FF":"Iceland","00ABE1":"NorthernEurope","0080FF":"Scandinavia","4778CC":"SouthernEurope","000080":"Ukraine","006EAE":"WesternEurope","AE5700":"Congo","FF8000":'EastAfrica',"804000":"Egypt","F3A94E":"Madagascar","FF915B":"NorthAfrica","7A5841":"SouthAfrica","80FF80":"Afghanistan","008040":"China","008080":"India","81bc43":"Irkutsk","80FF00":"Japan","5D8156":"Kamchatka","008000":"MiddleEast","004000":"Mongolia","50B100":"Siam","008A20":"Siberia","2F5029":"Ural","005B38":"Yakutsk","400040":"EasternAustralia","8000FF":"Indonesia","8800C2":"NewGuinea","800040":"WesternAustralia"};
 var imgsource = 'http://myusername.beryl.feralhosting.com/DL/risk-board.png';
 
+
+var socket = io.connect('http://localhost');
+socket.on('reply', function (data) {
+    dispMessage("Server acknowledged turn capture (message: "+data.message+")");
+});
+
+socket.on("connect",function(){main()});
 
 function decodeMessage(message)
 {
@@ -48,7 +56,7 @@ function receiveMessage(message)
 
 function sendMessage(message)
 {
-
+    socket.emit("completeTurn",message);
 }
 
 function CountryObject(n)
@@ -103,7 +111,7 @@ function convertAreaToCountry(X,Y)
 	{
 		if(X > ClickRangeOfCountryDict[i][0] && X < ClickRangeOfCountryDict[i][2] && Y > ClickRangeOfCountryDict[i][1] && Y < ClickRangeOfCountryDict[i][3])
 		{
-			//document.getElementById("debug shitv2").innerHTML = ClickRangeOfCountryDict[i][4];
+			//document.getElementById("debug_shitv2").innerHTML = ClickRangeOfCountryDict[i][4];
 			return ClickRangeOfCountryDict[i][4];
 		}
 	}
@@ -117,7 +125,9 @@ function convertAreaToCountry(X,Y)
 **/
 function composeMessage()
 {
-	//document.getElementById("debug shitv2").innerHTML = "in composemessage";
+	//document.getElementById("debug_shitv2").innerHTML = "in composemessage";
+    context.clearRect(0,0,canvas.width,canvas.height);
+    drawComponents();
 	if(bool)
 	{
 		if(determineAction(X,Y) != false)
@@ -141,6 +151,41 @@ function composeMessage()
 	}
 
 	window.requestAnimationFrame(composeMessage);
+}
+
+/* Draws all components onto the canvas */
+function drawComponents(){
+    //CREATE THE IMAGE BACKGROUND
+    context.drawImage(riskboard, 0,0, 1107, 598);
+    //CREATE BUTTONS
+
+    context.fillStyle=getColor();
+    context.fillRect(1107,0,100,50);
+    context.fillRect(1107,51,100,50);
+    context.fillRect(1107,102,100,50);
+    context.fillRect(1107,153,100,50);
+
+    //PUTTING WRITING ON THE BUTTONS
+    context.fillStyle="black";
+    context.font = "bold 12px Arial";
+    context.fillText("Place soldier(s)", 1113, 30);
+    context.fillText("Turn In Cards", 1113, 80);
+    context.fillText("Attack!", 1113, 130);
+    context.fillText("Move soldier(s)", 1113, 180);
+
+    //Draw current click
+    context.fillStyle="#000000";
+    context.fillRect(currClickCoords[0],currClickCoords[1],10,10);
+
+    dispMessage();
+}
+
+/* Display a message in the lower right corner of the screen */
+function dispMessage(message){
+    if(message)
+        this.message = message;
+    if(this.message)
+        context.fillText(this.message,10,canvas.height-5);
 }
 
 /**
@@ -200,23 +245,7 @@ function main()
 	riskboard = new Image();
 	riskboard.onload = function()
 	{
-		//CREATE THE IMAGE BACKGROUND
-		context.drawImage(riskboard, 0,0, 1107, 598);
-		//CREATE BUTTONS
-
-		context.fillStyle=getColor();
-		context.fillRect(1107,0,100,50);
-		context.fillRect(1107,51,100,50);
-		context.fillRect(1107,102,100,50);
-		context.fillRect(1107,153,100,50);
-
-		//PUTTING WRITING ON THE BUTTONS
-		context.fillStyle="black";
-		context.font = "bold 12px Arial";
-		context.fillText("Place soldier(s)", 1113, 30);
-		context.fillText("Turn In Cards", 1113, 80);
-		context.fillText("Attack!", 1113, 130);
-		context.fillText("Move soldier(s)", 1113, 180);
+		drawComponents();
 	}
 	riskboard.src = "http://myusername.beryl.feralhosting.com/DL/risk-board.png";
 	//unpackData(message);
@@ -226,6 +255,7 @@ function main()
 	$('#GAMEBOARD').click(function(e) {
 		X = event.pageX -10;
 		Y = event.pageY -50;
+        currClickCoords = [X,Y];//register click coordinates to global
 		var ctx = this.getContext('2d');
 		context.fillStyle="black";
 		context.fillRect(X-5,Y-5,10,10);
@@ -236,6 +266,4 @@ function main()
 
 	//canvas.addEventListener('click', clickReporter, false);
 	window.requestAnimationFrame(composeMessage);
-
-
 }

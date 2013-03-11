@@ -1,0 +1,18 @@
+{
+    "name": "TomatoBagel",
+    "description": "Multiplayer Javascript Game Framework",
+    "author": "",
+    "contributors": [
+        {
+            "name": "",
+            "email": ""
+        }
+    ],
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "3.1",
+        "socket.io":  "0.9.13",
+        "colors": "*"
+    }
+}
