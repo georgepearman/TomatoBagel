@@ -386,10 +386,30 @@
     [NSKeyedArchiver archiveRootObject:self toFile:fullPath];
 }
 
--(id) initWithDataFile:(NSString *)dataFilePath andMessage:(Message *)message
+-(id) initWithDataFile:(NSString *)dataFilePath
 {
     self = [NSKeyedUnarchiver unarchiveObjectWithFile:dataFilePath];
     return self;
+}
+
+- (Message*) importMessage:(NSArray *)message
+{
+    if ( [(NSString*)[message objectAtIndex:[message count] - 1] isEqualToString:@"PlaceSoldier"] )
+    {
+        
+    }
+    else if ( [(NSString*)[message objectAtIndex:[message count] - 1] isEqualToString:@"TurnInCards"] )
+    {
+        
+    }
+    else if ( [(NSString*)[message objectAtIndex:[message count] - 1] isEqualToString:@"Attack"] )
+    {
+        return [self didReceiveAttackFromPlayer:[message objectAtIndex:1] countryA:[message objectAtIndex:2] countryB:[message objectAtIndex:3]];
+    }
+    else if ( [(NSString*)[message objectAtIndex:[message count] - 1] isEqualToString:@"MoveSoldier"] )
+    {
+        
+    }
 }
 
 

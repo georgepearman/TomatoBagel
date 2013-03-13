@@ -13,6 +13,7 @@
 		5EAFC47D16EB256B005CF75C /* HowManyDiceToUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC47C16EB256B005CF75C /* HowManyDiceToUse.m */; };
 		5EAFC48316EB45FB005CF75C /* MoveTroopsToKilledCountryMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC48216EB45FB005CF75C /* MoveTroopsToKilledCountryMessage.m */; };
 		5EAFC48616EB7388005CF75C /* GetNextAPhaseCountryPick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC48516EB7387005CF75C /* GetNextAPhaseCountryPick.m */; };
+		5EAFC48916EB8560005CF75C /* MessageInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFC48816EB8560005CF75C /* MessageInterpreter.m */; };
 		5ED9A88916EAD23C0061605E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED9A88816EAD23C0061605E /* Foundation.framework */; };
 		5ED9A88C16EAD23C0061605E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9A88B16EAD23C0061605E /* main.m */; };
 		5ED9A89016EAD23C0061605E /* Risk.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5ED9A88F16EAD23C0061605E /* Risk.1 */; };
@@ -49,6 +50,8 @@
 		5EAFC48216EB45FB005CF75C /* MoveTroopsToKilledCountryMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTroopsToKilledCountryMessage.m; sourceTree = "<group>"; };
 		5EAFC48416EB7387005CF75C /* GetNextAPhaseCountryPick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNextAPhaseCountryPick.h; sourceTree = "<group>"; };
 		5EAFC48516EB7387005CF75C /* GetNextAPhaseCountryPick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNextAPhaseCountryPick.m; sourceTree = "<group>"; };
+		5EAFC48716EB8560005CF75C /* MessageInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInterpreter.h; sourceTree = "<group>"; };
+		5EAFC48816EB8560005CF75C /* MessageInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInterpreter.m; sourceTree = "<group>"; };
 		5ED9A88516EAD23C0061605E /* Risk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Risk; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED9A88816EAD23C0061605E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5ED9A88B16EAD23C0061605E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				5ED9A88B16EAD23C0061605E /* main.m */,
+				5EAFC48716EB8560005CF75C /* MessageInterpreter.h */,
+				5EAFC48816EB8560005CF75C /* MessageInterpreter.m */,
 				5ED9A8B016EAD7C20061605E /* Country.h */,
 				5ED9A8B116EAD7C20061605E /* Country.m */,
 				5ED9A8B316EAD81D0061605E /* Player.h */,
@@ -211,6 +216,7 @@
 				5EAFC47D16EB256B005CF75C /* HowManyDiceToUse.m in Sources */,
 				5EAFC48316EB45FB005CF75C /* MoveTroopsToKilledCountryMessage.m in Sources */,
 				5EAFC48616EB7388005CF75C /* GetNextAPhaseCountryPick.m in Sources */,
+				5EAFC48916EB8560005CF75C /* MessageInterpreter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

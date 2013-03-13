@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "RiskModel.h"
+#import "MessageInterpreter.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
         
-        printf("%s\n", argv[1]);
+        MessageInterpreter* messInt = [[MessageInterpreter alloc] initWithString:[NSString stringWithUTF8String:argv[1]]];
+        RiskModel* game = [[RiskModel alloc] initWithDataFile:[messInt getGameId]];
+        Message* result = [game importMessage:messInt.messageInChunks];
     }
     return 0;
 }

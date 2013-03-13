@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Country.h"
 #import "AllMessageImports.h"
+#import "RiskModel.h"
 
 @class Message;
 @interface RiskModel : NSObject
@@ -34,7 +35,8 @@
 @property BOOL givenCardForThisRound;
 -(void) exportToDataFile;
 - (void) encodeWithCoder: (NSCoder * ) coder;
-- (id) initWithDataFile: (NSString*) dataFilePath andMessage: (Message*) message;
+- (id) initWithDataFile: (NSString*) dataFilePath;
+- (Message*) importMessage: (NSArray*) message;
 ////////
 
 //  For sending messages to screen
