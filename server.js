@@ -14,6 +14,7 @@ var express = require('express'),
     http    = require('http'),
     server  = http.createServer(app),
     io      = require('socket.io').listen(server, {'log level': 1});
+var execSync = require('exec-sync'); //  for cli integration
 
 /* Starts server listener on port 80 */
 server.listen(8888,function(){
@@ -39,12 +40,16 @@ app.use(express.static(__dirname +PUBLIC_DIR));
 io.sockets.on('connection',function(socket){
     socket.emit('intialize',"Initialization message");
     socket.on('FromUI',function(data){
-        // console.log("Captured message from ui: "+data.yellow);
-        // socket.emit('ToUI', {message: data});
+        //  when we get a message from the ui, we run the message
+        //  through the command line tool and send the returned message
+        //  back to the ui.
+        console.log("sending message from ui to game model: "+data.yellow);
+        socket.emit('ToUI', execSync( 'GameModels/RunRisk ' + data ) );
     });
     socket.on('UIDebug',function( data ){
         console.log("UIDebug: " + data.yellow );
     });
+    console.log(execSync('echo $HOME'));
 });
 
 /* Simply writes request information out to console */
