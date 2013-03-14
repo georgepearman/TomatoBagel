@@ -16,8 +16,8 @@ var express = require('express'),
     io      = require('socket.io').listen(server, {'log level': 1});
 
 /* Starts server listener on port 80 */
-server.listen(80,function(){
-    console.log('Node.js Server started on port 80');
+server.listen(8888,function(){
+    console.log('Node.js Server started on port 8888');
 });
 
 /* Attach logger to server callback */
@@ -38,9 +38,12 @@ app.use(express.static(__dirname +PUBLIC_DIR));
 /* Sending and receiving socket.io messages occurs here */
 io.sockets.on('connection',function(socket){
     socket.emit('intialize',"Initialization message");
-    socket.on('completeTurn',function(data){
-        console.log("Captured: "+data.yellow);
-        socket.emit('reply', {message: data});
+    socket.on('FromUI',function(data){
+        // console.log("Captured message from ui: "+data.yellow);
+        // socket.emit('ToUI', {message: data});
+    });
+    socket.on('UIDebug',function( data ){
+        console.log("UIDebug: " + data.yellow );
     });
 });
 
