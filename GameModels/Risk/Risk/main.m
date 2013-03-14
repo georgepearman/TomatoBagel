@@ -14,10 +14,11 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        
-        MessageInterpreter* messInt = [[MessageInterpreter alloc] initWithString:[NSString stringWithUTF8String:argv[1]]];
-        RiskModel* game = [[RiskModel alloc] initWithDataFile:[messInt getGameId]];
-        Message* result = [game importMessage:messInt.messageInChunks];
+
+        printf( "ThisIsADummyMessageFromRunRisk\n" );
+//        MessageInterpreter* messInt = [[MessageInterpreter alloc] initWithString:[NSString stringWithUTF8String:argv[1]]];
+//        RiskModel* game = [[RiskModel alloc] initWithDataFile:[messInt getGameId]];
+//        Message* result = [game importMessage:messInt.messageInChunks];
     }
     return 0;
 }
