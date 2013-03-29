@@ -1,20 +1,122 @@
-<HTML>
-<HEAD>
-<script type="text/javascript" src="jquery-1.9.1.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="main.js"> </script>
-</HEAD>
-<BODY style="background-color: #303030">
-<div id="gamestate" style="background-color: #C09853">WTFMATE</div>
-<div id="debug_shitv2" style="background-color: #CC0000"></div>
-<canvas id="GAMEBOARD" style="background-color:white; position:absolute;left:10;top:50;"></canvas>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var request;
+        $(document).ready(function(){
+            requestUserInfo();
+            $("#submit").click(onCreateGroupClick);
+        });
 
+        var requestUserInfo = function(){
+            if(request){
+                request.abort();
+            }
 
-<input type="button" value="Place Soldier(s)" name="placeSoldiersButton" style="position: absolute; left: 1113px; top:40px"/>
-<input type="button" value="Turn in Cards" name="turnInCardsButton" style="position: absolute; left: 1113px; top: 65px"/>
-<input type="button" value="Attack!" name="attackButton" style="position: absolute; left: 1113px; top: 90px"/>
-<input type="button" value="Move Soldier(s)" name="moveSoldiersButton" style="position: absolute; left: 1113px; top: 115px"/> 
+            /* Disable all inputs on page */
+            var $inputs = $("input");
+            $inputs.prop("disabled", true);
+            request = $.ajax({
+               type: "POST",
+               url: "/info"
+            });
 
-<div id="debug shit" style="background-color: #B08843"></div>
-</BODY>
-</HTML>
+            request.done(function(response,textStatus,jqXHR){
+                console.log(response)
+                setUserGroups(response);
+                request.abort();
+            });
+
+            request.fail(function (jqXHR, textStatus, errorThrown){
+                console.log("The following error occured: "+
+                        textStatus+", "+errorThrown);
+            });
+
+            request.always(function () {
+                console.log("Finished info request");
+                $inputs.prop("disabled", false);
+            });
+
+            event.preventDefault();
+        }
+
+        var onCreateGroupClick = function(event){
+                if(request){
+                    request.abort();
+                }
+
+                var $form = $("#createGroup");
+                var $inputs = $("#createGroup > input");
+                var serialized = $form.serialize();
+                $inputs.prop("disabled", true);
+                request = $.ajax({
+                    type: "POST",
+                    url: "/create",
+                    data: serialized
+                });
+
+                request.done(function(response,textStatus,jqXHR){
+                    var respStr = response;
+                    $("#generalReply").html(respStr);
+                    request.abort();
+                });
+
+                request.fail(function (jqXHR, textStatus, errorThrown){
+                    $("#generalReply").html("The following error occured: "+
+                            textStatus+","+errorThrown);
+                });
+
+                request.always(function () {
+                    $inputs.prop("disabled", false);
+                });
+
+                event.preventDefault();
+        }
+
+        var setUserGroups = function(userInfo){
+            var groupList = userInfo.groups.map(function(element){
+                var groupInfo = element.split(",");
+                var groupHash = groupInfo[0];
+                var groupName = groupInfo[1];
+                var linkRef = "/join/"+groupHash;
+                var linkContent = groupName;
+                var isCurrGroup = groupHash==userInfo.currentGroupInfo.groupHash ? "class='highlighted'"  : ""; //set variable to "class='highlighted'" IF groupHash equals the client's currently registered group ELSE set variable to empty string
+                return "<a "+isCurrGroup+"href='"+linkRef+"'>"+linkContent+"</a>";
+            })
+            console.log(groupList);
+            $("#groupSelect").html(groupList.join("<br />"));
+        }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+<div class="box centerBox">
+    <h1>Create new group</h1>
+    <form id="createGroup">
+        <label>
+            <span>Name:</span>
+            <input type="text" name="name" id="name" class="input_text" />
+        </label>
+        <label>
+            <span>Slots:</span>
+            <select id="slots" name="slots" class="input_dropdown">
+                <option value = "1">one</option>
+                <option value = "2">two</option>
+                <option value = "3">three</option>
+                <option value = "4">four</option>
+            </select>
+        </label>
+        <input type="button" value="Go" class="button" id="submit">
+    </form>
+</div>
+<div class="box leftBox">
+    <label id="generalReply"></label>
+</div>
+<div class="box rightBox" id="groupSelect">
+</div>
+</body>
+</html>
